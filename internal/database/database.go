@@ -21,8 +21,15 @@ func InitDB() error {
 		return fmt.Errorf("Fail to ping database: %w", err)
 	}
 
+	// Users
+	// _, err = DB.Exec(`CREATE TABLE IF NOT EXISTS
+	//  users (userID TEXT PRIMARY KEY, name TEXT)`)
+
+	// Sessions
 	_, err = DB.Exec(`CREATE TABLE IF NOT EXISTS
-   users (userID TEXT PRIMARY KEY, name TEXT)`)
+   sessions (id TEXT PRIMARY KEY NOT NULL,
+   loginStatus TEXT, userID TEXT, username TEXT,
+   expiryTime INTEGER)`)
 
 	return err
 }

@@ -23,16 +23,13 @@ I am seeing two featueres
 Sign up / login / logout (auth)
 The account themself (transerver and payment methods)
 
-
+## What must get done today auth and user must get set up!
+## And an hour og uni must get done
 
 ## Plan
-Try and understand file struture and how the flow will work 
-Link how every will go thought
+Do the auth with password 
 
-Next I think I should try and understand how a server works in go
-
-## Next
-make a basic server with lots of thing which are wrong just in main trying to understand the sytnx syntx
+ I need to do session at some point as well
 
 
 
@@ -40,7 +37,3 @@ Git Hub links for go projects
 https://github.com/benbjohnson/myapp/blob/main/main.go Later try and understand the server part ect
 
 https://go.dev/doc/modules/layout look into this at some point
-
-└───interal
-    ├───database
-    ├───handlers
