@@ -3,6 +3,7 @@ package main
 import (
 	"banking-app/internal/database"
 	"banking-app/internal/server"
+	"banking-app/internal/sessions"
 	"fmt"
 	"net/http"
 )
@@ -10,10 +11,12 @@ import (
 func main() {
 	err := database.InitDB()
 	if err != nil {
-		fmt.Printf("Error connection with database %v", err)
+		fmt.Printf("Error connection with database %v\n", err)
 		return
 	}
 	defer database.DB.Close()
+	sessions.CleanUpSessions()
+
 	// I am also going to have to server static files here look fabiens code
 	server := &http.Server{
 		Addr:    ":8080",
