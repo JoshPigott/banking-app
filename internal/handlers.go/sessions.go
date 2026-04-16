@@ -4,6 +4,7 @@ import (
 	"banking-app/internal/sessions"
 	"fmt"
 	"net/http"
+	"time"
 )
 
 func CreateSession(w http.ResponseWriter, r *http.Request) {
@@ -14,7 +15,9 @@ func CreateSession(w http.ResponseWriter, r *http.Request) {
 	}
 	username := r.FormValue("username")
 	userId := r.FormValue("userID")
-	sessionID, err := sessions.CreateSession(username, userId)
+	expiryTime := time.Now().Add(time.Hour)
+	fakeExpiryTime := time.Now().Add(30 * time.Second)
+	sessionID, err := sessions.CreateSession(username, userId, fakeExpiryTime)
 
 	if err != nil {
 		http.Error(w, "Fail to add to database", http.StatusInternalServerError)
@@ -22,11 +25,11 @@ func CreateSession(w http.ResponseWriter, r *http.Request) {
 	} else {
 		fmt.Printf("A session has been made %s\n", sessionID)
 	}
-	// I need to add expiry here
 	http.SetCookie(w, &http.Cookie{
 		Name:     "session_id",
 		Value:    sessionID,
 		Path:     "/",
+		Expires:  expiryTime,
 		Secure:   true,
 		HttpOnly: true,
 		SameSite: http.SameSiteStrictMode,

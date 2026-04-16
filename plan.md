@@ -23,15 +23,11 @@ I am seeing two featueres
 Sign up / login / logout (auth)
 The account themself (transerver and payment methods)
 
-## What must get done today auth and user must get set up!
-## And an hour og uni must get done
+
 
 ## Plan
-Do the auth with password 
-
- I need to do session at some point as well
-
-
+Refactor the session thing 
+middlware
 
 Git Hub links for go projects
 https://github.com/benbjohnson/myapp/blob/main/main.go Later try and understand the server part ect

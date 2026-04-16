@@ -14,11 +14,11 @@ func InitDB() error {
 	var err error
 	DB, err = sql.Open("sqlite3", "./data/database.db")
 	if err != nil {
-		return fmt.Errorf("Unable to open database: %w", err)
+		return fmt.Errorf("Unable to open database: %w\n", err)
 	}
 
 	if err := DB.Ping(); err != nil {
-		return fmt.Errorf("Fail to ping database: %w", err)
+		return fmt.Errorf("Fail to ping database: %w\n", err)
 	}
 
 	// Users
