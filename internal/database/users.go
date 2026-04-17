@@ -1,21 +1,21 @@
 package database
 
-// import (
-// 	"banking-app/internal/models"
-// 	"fmt"
-// )
+import (
+	"banking-app/internal/models"
+)
 
-// func AddUser(userID string, name string) error {
-// 	_, err := DB.Exec(`INSERT INTO users
-//    (userID, name) VALUES(?, ?)`, userID, name)
-// 	return err
-// }
+// I am going to need to remake this with userID, username and password
 
-// func GetUser(userID string) (models.User, error) {
-// 	var user models.User
-// 	querry := "SELECT * FROM USERS WHERE userID = ?"
-// 	row := DB.QueryRow(querry, userID)
-// 	fmt.Print("this is a row:", *row)
-// 	err := row.Scan(&user.UserID, &user.Name)
-// 	return user, err
-// }
+func CreateUserAccount(user models.User) error {
+	querry := `INSERT INTO users (userID, username, hashedPassword) VALUES(?, ?, ?)`
+	_, err := DB.Exec(querry, user.ID, user.Name, user.HashedPassword)
+	return err
+}
+
+func GetUser(username string) (models.User, error) {
+	var user models.User
+	querry := "SELECT * FROM USERS WHERE username=?"
+	row := DB.QueryRow(querry, username)
+	err := row.Scan(&user.ID, &user.Name, &user.HashedPassword)
+	return user, err
+}

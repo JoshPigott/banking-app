@@ -22,14 +22,14 @@ func InitDB() error {
 	}
 
 	// Users
-	// _, err = DB.Exec(`CREATE TABLE IF NOT EXISTS
-	//  users (userID TEXT PRIMARY KEY, name TEXT)`)
+	_, err = DB.Exec(`CREATE TABLE IF NOT EXISTS
+	 users (userID TEXT PRIMARY KEY,
+	 username TEXT UNIQUE, hashedPassword TEXT)`)
 
 	// Sessions
 	_, err = DB.Exec(`CREATE TABLE IF NOT EXISTS
-   sessions (id TEXT PRIMARY KEY NOT NULL,
-   loginStatus TEXT, userID TEXT, username TEXT,
-   expiryTime INTEGER)`)
+	sessions (id TEXT PRIMARY KEY NOT NULL,
+	userID TEXT, expiryTime INTEGER)`)
 
 	return err
 }
