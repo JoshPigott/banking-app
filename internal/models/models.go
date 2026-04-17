@@ -1,14 +1,13 @@
 package models
 
-// type User struct {
-// 	UserID string
-// 	Name   string
-// }
+type User struct {
+	ID             string
+	Name           string
+	HashedPassword string
+}
 
 type Session struct {
-	ID          string
-	LoginStatus bool
-	UserID      string
-	Username    string
-	ExpiryTime  int64
+	ID         string
+	UserID     string
+	ExpiryTime int64
 }

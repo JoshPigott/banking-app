@@ -14,9 +14,6 @@ func validSession(cookie *http.Cookie) error {
 	if err != nil {
 		return err
 	}
-	if !session.LoginStatus {
-		return errors.New("not logged in")
-	}
 	if time.Now().Unix() >= session.ExpiryTime {
 		database.DeleteSession(session.ID)
 		err = errors.New("Expiried session")

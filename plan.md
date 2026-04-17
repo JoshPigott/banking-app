@@ -1,19 +1,3 @@
-├───.vscode
-├───data
-|
-└───interal
-    ├───database
-    ├───handlers
-    ├───middleware
-    ├───public
-    │   ├───assets
-    │   └───scripts
-    ├───routes
-    ├───services
-    │  
-    └───utils
-Trying and make it 
-
 Trying and think per feature more like look at asb and that and think about the feature
 **Banking features**
 So think you have a login and sign up page
@@ -26,8 +10,20 @@ The account themself (transerver and payment methods)
 
 
 ## Plan
-Refactor the session thing 
-middlware
+Build session the accounts with auth to login and trigger a session to be made
+I will need to hash the password they give me will like a salt and that
+I will then need to store the hashed password
+
+I will need to different request flows 
+login and sign up
+
+Sign up check that password is good that got made and gave a user name if not just return the page with a meassge saying whatever
+Login get and password hash the password check user and database
+So there are two reponse good or bad 
+
+
+
+
 
 Git Hub links for go projects
 https://github.com/benbjohnson/myapp/blob/main/main.go Later try and understand the server part ect

@@ -3,7 +3,7 @@ package main
 import (
 	"banking-app/internal/database"
 	"banking-app/internal/server"
-	"banking-app/internal/sessions"
+	"banking-app/internal/services"
 	"fmt"
 	"net/http"
 )
@@ -15,7 +15,7 @@ func main() {
 		return
 	}
 	defer database.DB.Close()
-	sessions.CleanUpSessions()
+	services.CleanUpSessions()
 
 	// I am also going to have to server static files here look fabiens code
 	server := &http.Server{
