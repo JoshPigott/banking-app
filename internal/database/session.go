@@ -28,3 +28,11 @@ func GetSession(id string) (models.Session, error) {
 	err := row.Scan(&session.ID, &session.UserID, &session.ExpiryTime)
 	return session, err
 }
+
+func GetUserID(id string) (string, error) {
+	var userID string
+	querry := "SELECT userID FROM sessions WHERE id = ?"
+	row := DB.QueryRow(querry, id)
+	err := row.Scan(&userID)
+	return userID, err
+}
