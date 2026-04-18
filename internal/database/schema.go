@@ -31,5 +31,18 @@ func InitDB() error {
 	sessions (id TEXT PRIMARY KEY NOT NULL,
 	userID TEXT, expiryTime INTEGER)`)
 
+	// Bank accounts
+	_, err = DB.Exec(`CREATE TABLE IF NOT EXISTS
+	everydayAccount (userID TEXT FORGIN KEY,
+	balance INTEGER)`)
+
+	_, err = DB.Exec(`CREATE TABLE IF NOT EXISTS
+	saverAccount (userID TEXT FORGIN KEY,
+	balance INTEGER)`)
+
+	_, err = DB.Exec(`CREATE TABLE IF NOT EXISTS
+	kiwiSaverAccount (userID TEXT FORGIN KEY,
+	balance INTEGER)`)
+
 	return err
 }

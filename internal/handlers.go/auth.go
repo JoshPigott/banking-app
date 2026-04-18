@@ -33,7 +33,6 @@ func SignUp(w http.ResponseWriter, r *http.Request) {
 	}
 	username := r.FormValue("username")
 	password := r.FormValue("password")
-
 	if !services.IsValidPassword(password) || !services.IsValidUsername(username) {
 		w.Header().Set("Content-Type", "text/html; charset=UTF-8")
 		w.WriteHeader(http.StatusUnauthorized)
@@ -46,7 +45,6 @@ func SignUp(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Interal server error", http.StatusInternalServerError)
 		return
 	}
-
 	err = setSessionCookie(w, userID)
 	if err != nil {
 		http.Error(w, "Internal server error", http.StatusInternalServerError)
