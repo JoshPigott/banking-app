@@ -7,11 +7,6 @@ import (
 	"fmt"
 )
 
-func getUser(username string, hashedPassword string) domain.User {
-	user := domain.User{ID: utils.CreateID(), Name: username, HashedPassword: hashedPassword}
-	return user
-}
-
 // Hashes password and stores account and create new bank account
 func CreateUserAccount(username string, password string) (string, error) {
 	var user domain.User
@@ -32,4 +27,9 @@ func CreateUserAccount(username string, password string) (string, error) {
 		return user.ID, fmt.Errorf("Fail to create everyday bank account: %w\n", err)
 	}
 	return user.ID, err
+}
+
+func getUser(username string, hashedPassword string) domain.User {
+	user := domain.User{ID: utils.CreateID(), Name: username, HashedPassword: hashedPassword}
+	return user
 }
