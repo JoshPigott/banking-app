@@ -31,9 +31,10 @@ func SignUp(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Parse error", http.StatusBadRequest)
 		return
 	}
+
 	username := r.FormValue("username")
 	password := r.FormValue("password")
-	if !services.IsValidPassword(password) || !services.IsValidUsername(username) {
+	if !services.IsValidCredentials(username, password) {
 		w.Header().Set("Content-Type", "text/html; charset=UTF-8")
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte(`<div>Invalid password or username</div>`))

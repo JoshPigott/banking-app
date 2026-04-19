@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"banking-app/internal/database"
-	"banking-app/internal/models"
+	"banking-app/internal/domain"
+	"banking-app/internal/services"
 	"net/http"
 	"text/template"
 )
@@ -11,29 +11,26 @@ var tmpl = template.Must(template.ParseFiles("web/templates/balance.html"))
 
 func GetAccountBalance(w http.ResponseWriter, r *http.Request) {
 	params := r.URL.Query()
-	accountType := models.AccountType(params.Get("accountType"))
+	accountType := domain.AccountType(params.Get("accountType"))
 	if !accountType.IsValid() {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
-	cookie, _ := r.Cookie("session_id")
-	sessionID := cookie.Value
-
-	userID, err := database.GetUserID(sessionID)
+	cookie, err := r.Cookie("session_id")
 	if err != nil {
-		http.Error(w, "Fail to get userID", http.StatusInternalServerError)
+		http.Error(w, "Fail to get cookie", http.StatusInternalServerError)
 		return
 	}
 
-	tableName := accountType.GetTableName()
-	balance, err := database.GetAccountBalance(tableName, userID)
+	sessionID := cookie.Value
+	balance, err := services.GetAccountBalance(sessionID, accountType)
 	if err != nil {
 		http.Error(w, "Fail to get balance", http.StatusInternalServerError)
 		return
 	}
 
-	accountBalance := models.AccountBalance{
+	accountBalance := domain.AccountBalance{
 		AccountType: accountType,
 		Balance:     balance,
 	}

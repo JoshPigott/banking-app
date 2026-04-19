@@ -2,46 +2,31 @@ package services
 
 import (
 	"banking-app/internal/database"
+	"banking-app/internal/domain"
 	"database/sql"
 	"errors"
-	"unicode"
 
 	"golang.org/x/crypto/bcrypt"
 )
 
-func hashPassword(password string) (string, error) {
-	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 12)
-	return string(bytes), err
-}
-
-func CheckPasswordHash(password, hash string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
-	return err == nil
-}
-
-// Checks if there and number and low and upper case letters
-func hasBothCasesAndNumber(password string) bool {
-	var hasLowerCase, hasUpperCase, hasNumber bool
-	for _, r := range password {
-		if unicode.IsUpper(r) {
-			hasUpperCase = true
-		}
-		if unicode.IsLower(r) {
-			hasLowerCase = true
-		}
-		if unicode.IsDigit(r) {
-			hasNumber = true
-		}
+func ValidLoginCredentials(username string, password string) (bool, string) {
+	user, err := database.GetUser(username)
+	if err != nil {
+		return false, user.ID
 	}
-	return hasLowerCase && hasUpperCase && hasNumber
+	valid := checkPasswordHash(password, user.HashedPassword)
+	return valid, user.ID
 }
 
-// Checks the size and character in the password
-func IsValidPassword(password string) bool {
-	if len(password) < 8 {
+func IsValidCredentials(u string, p string) bool {
+	password := domain.NewPassword(p)
+	if !password.IsStrong() {
 		return false
 	}
-	if !hasBothCasesAndNumber(password) {
+	if len(u) < 6 {
+		return false
+	}
+	if !isUsernameUnique(u) {
 		return false
 	}
 	return true
@@ -55,22 +40,12 @@ func isUsernameUnique(username string) bool {
 	return false
 }
 
-// Makes sure username is long enough and unique
-func IsValidUsername(username string) bool {
-	if len(username) < 6 {
-		return false
-	}
-	if !isUsernameUnique(username) {
-		return false
-	}
-	return true
+func hashPassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 12)
+	return string(bytes), err
 }
 
-func ValidLoginCredentials(username string, password string) (bool, string) {
-	user, err := database.GetUser(username)
-	if err != nil {
-		return false, user.ID
-	}
-	valid := CheckPasswordHash(password, user.HashedPassword)
-	return valid, user.ID
+func checkPasswordHash(password, hash string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+	return err == nil
 }

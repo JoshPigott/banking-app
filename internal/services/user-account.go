@@ -2,18 +2,14 @@ package services
 
 import (
 	"banking-app/internal/database"
-	"banking-app/internal/models"
+	"banking-app/internal/domain"
+	utils "banking-app/internal/uilts"
 	"fmt"
 )
 
-func getUser(username string, hashedPassword string) models.User {
-	user := models.User{ID: createID(), Name: username, HashedPassword: hashedPassword}
-	return user
-}
-
 // Hashes password and stores account and create new bank account
 func CreateUserAccount(username string, password string) (string, error) {
-	var user models.User
+	var user domain.User
 	hashedPassword, err := hashPassword(password)
 
 	if err != nil {
@@ -31,4 +27,9 @@ func CreateUserAccount(username string, password string) (string, error) {
 		return user.ID, fmt.Errorf("Fail to create everyday bank account: %w\n", err)
 	}
 	return user.ID, err
+}
+
+func getUser(username string, hashedPassword string) domain.User {
+	user := domain.User{ID: utils.CreateID(), Name: username, HashedPassword: hashedPassword}
+	return user
 }
