@@ -1,10 +1,10 @@
 package database
 
 import (
-	"banking-app/internal/models"
+	"banking-app/internal/domain"
 )
 
-func CreateSession(session *models.Session) error {
+func CreateSession(session *domain.Session) error {
 	query := `INSERT INTO sessions (id, userId, expiryTime) VALUES(?, ?, ?)`
 	_, err := DB.Exec(query, &session.ID,
 		&session.UserID, &session.ExpiryTime)
@@ -21,8 +21,8 @@ func CleanUpSessions(currTime int64) error {
 	return err
 }
 
-func GetSession(id string) (models.Session, error) {
-	var session models.Session
+func GetSession(id string) (domain.Session, error) {
+	var session domain.Session
 	querry := "SELECT * FROM sessions WHERE id = ?"
 	row := DB.QueryRow(querry, id)
 	err := row.Scan(&session.ID, &session.UserID, &session.ExpiryTime)

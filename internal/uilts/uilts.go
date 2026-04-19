@@ -1,4 +1,4 @@
-package services
+package uilts
 
 import (
 	"crypto/rand"
@@ -6,7 +6,7 @@ import (
 )
 
 // Makes a random 16 byte string
-func createID() string {
+func CreateID() string {
 	randomBytes := make([]byte, 16)
 	rand.Read(randomBytes)
 	id := hex.EncodeToString(randomBytes)

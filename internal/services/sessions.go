@@ -2,21 +2,14 @@ package services
 
 import (
 	"banking-app/internal/database"
-	"banking-app/internal/models"
+	"banking-app/internal/domain"
 	"fmt"
 	"time"
 )
 
-func createSessionStruct(userID string, expiryTime time.Time) *models.Session {
-	id := createID()
-	session := models.Session{ID: id,
-		UserID: userID, ExpiryTime: expiryTime.Unix()}
-	return &session
-}
-
 func CreateSession(userID string) (string, time.Time, error) {
 	expiryTime := time.Now().Add(time.Hour)
-	session := createSessionStruct(userID, expiryTime)
+	session := domain.NewSession(userID, expiryTime)
 	err := database.CreateSession(session)
 	if err != nil {
 		err = fmt.Errorf("There is an error in creating the session %w", err)
