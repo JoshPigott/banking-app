@@ -3,6 +3,7 @@ package services
 import (
 	"banking-app/internal/database"
 	"banking-app/internal/domain"
+	"errors"
 )
 
 // Get userID then the account balance
@@ -17,8 +18,34 @@ func GetAccountBalance(sessionID string, bankAccountType domain.BankAccountType)
 	return balance, err
 }
 
+func MakeTransfer(t domain.TransferRequest) error {
+	userID, err := database.GetUserID(t.SessionID)
+	if err != nil {
+		return errors.New("Unable to get user")
+	}
+	// Get database table names
+	accountFromTable := t.AccountFrom.GetTableName()
+	accountToTable := t.AccountTo.GetTableName()
+
+	if err = database.MakeTransfer(accountFromTable, accountToTable, t.AmountCents, userID); err != nil {
+		return errors.New("Unable to make transfer")
+	}
+	return err
+}
+
+// Check if transfer data is valid
+func CanTransfer(t domain.TransferRequest) error {
+	if !t.AccountFrom.CanWithdraw() || !t.AccountTo.IsValid() || t.AccountFrom == t.AccountTo {
+		return errors.New("Invalid to and from accounts")
+	}
+	if !isValidTransferAmount(t.AmountCents, t.AccountFrom, t.SessionID) {
+		return errors.New("Invalid transfer amount")
+	}
+	return nil
+}
+
 // Checks if the amount to transfer is valid or not
-func IsValidTransferAmount(transferAmount int, accountFrom domain.BankAccountType, sessionID string) bool {
+func isValidTransferAmount(transferAmount int, accountFrom domain.BankAccountType, sessionID string) bool {
 	if transferAmount <= 0 {
 		return false
 	}
@@ -31,17 +58,4 @@ func IsValidTransferAmount(transferAmount int, accountFrom domain.BankAccountTyp
 		return false
 	}
 	return true
-}
-
-func MakeTransfer(transferAmount int, accountFrom domain.BankAccountType, accountTo domain.BankAccountType, sessionID string) error {
-	userID, err := database.GetUserID(sessionID)
-	if err != nil {
-		return err
-	}
-	// Get database table names
-	accountFromTable := accountFrom.GetTableName()
-	accountToTable := accountTo.GetTableName()
-
-	err = database.MakeTransfer(accountFromTable, accountToTable, transferAmount, userID)
-	return err
 }

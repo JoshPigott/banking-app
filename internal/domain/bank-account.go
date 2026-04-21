@@ -34,3 +34,10 @@ type AccountBalance struct {
 	BankAccountType BankAccountType
 	Balance         float64
 }
+
+type TransferRequest struct {
+	SessionID   string
+	AccountFrom BankAccountType
+	AccountTo   BankAccountType
+	AmountCents int
+}
