@@ -40,4 +40,20 @@ type TransferRequest struct {
 	AccountFrom BankAccountType
 	AccountTo   BankAccountType
 	AmountCents int
+	// Derived / computed later
+	AccountFromTable string
+	AccountToTable   string
+	UserID           string
+}
+
+type PaymentRequest struct {
+	SessionID        string
+	AccountFrom      BankAccountType
+	ReceiverUsername string
+	AmountCents      int
+	// Derived / computed later
+	AccountFromTable string
+	AccountToTable   string
+	UserID           string
+	ReceiveUserID    string
 }

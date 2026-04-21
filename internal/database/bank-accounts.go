@@ -1,6 +1,7 @@
 package database
 
 import (
+	"banking-app/internal/domain"
 	"database/sql"
 	"fmt"
 )
@@ -34,8 +35,18 @@ func GetAccountBalance(account string, userID string) (int, error) {
 	return balanceCents, err
 }
 
-type DBTX interface {
-	Exec(query string, args ...any) (sql.Result, error)
+// Makes sure WithDraw can't happen without Deposit happening
+func MakePayment(p domain.PaymentRequest) error {
+	return withTx(func(tx *sql.Tx) error {
+		return payment(tx, p)
+	})
+}
+
+// Makes sure WithDraw can't happen without Deposit happening
+func MakeTransfer(t domain.TransferRequest) error {
+	return withTx(func(tx *sql.Tx) error {
+		return transfer(tx, t)
+	})
 }
 
 // Note in both withdraw and in deposit account,
@@ -76,22 +87,31 @@ func Deposit(db DBTX, account string, amount int, userID string) error {
 	return err
 }
 
-func transfer(db DBTX, accountFromTable string, accountToTable string, amount int, userID string) error {
+// accountFromTable string, accountToTable string, amount
+func payment(db DBTX, p domain.PaymentRequest) error {
 	var err error
-	if err = WithDraw(db, accountFromTable, amount, userID); err != nil {
+	if err = WithDraw(db, p.AccountFromTable, p.AmountCents, p.UserID); err != nil {
 		return err
 	}
-	if err = Deposit(db, accountToTable, amount, userID); err != nil {
+	if err = Deposit(db, p.AccountToTable, p.AmountCents, p.ReceiveUserID); err != nil {
 		return err
 	}
 	return err
 }
 
-// Make sure WithDraw can't happen without Deposit happening
-func MakeTransfer(accountFromTable string, accountToTable string, amount int, userID string) error {
-	return withTx(func(tx *sql.Tx) error {
-		return transfer(tx, accountFromTable, accountToTable, amount, userID)
-	})
+func transfer(db DBTX, t domain.TransferRequest) error {
+	var err error
+	if err = WithDraw(db, t.AccountFromTable, t.AmountCents, t.UserID); err != nil {
+		return err
+	}
+	if err = Deposit(db, t.AccountToTable, t.AmountCents, t.UserID); err != nil {
+		return err
+	}
+	return err
+}
+
+type DBTX interface {
+	Exec(query string, args ...any) (sql.Result, error)
 }
 
 // With muilple database changes makes sure they all happen or none

@@ -1,14 +1,14 @@
 package handlers
 
 import (
-	"banking-app/internal/services"
+	"banking-app/internal/helpers"
 	"net/http"
 )
 
 // Set reponse with a cookie containing session id
 func setSessionCookie(w http.ResponseWriter, userID string) error {
 	// Creates session in database
-	sessionID, expiryTime, err := services.CreateSession(userID)
+	sessionID, expiryTime, err := helpers.CreateSession(userID)
 	if err != nil {
 		return err
 	}
@@ -38,14 +38,14 @@ func SignUp(w http.ResponseWriter, r *http.Request) {
 	password := r.FormValue("password")
 
 	// Check if username and password are valid
-	if !services.IsValidCredentials(username, password) {
+	if !helpers.IsValidCredentials(username, password) {
 		w.Header().Set("Content-Type", "text/html; charset=UTF-8")
 		w.WriteHeader(http.StatusUnauthorized)
 		w.Write([]byte(`<div>Invalid password or username</div>`))
 		return
 	}
 	// Create account in database
-	userID, err := services.CreateUserAccount(username, password)
+	userID, err := helpers.CreateUserAccount(username, password)
 	if err != nil {
 		http.Error(w, "Interal server error", http.StatusInternalServerError)
 		return
@@ -71,7 +71,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	password := r.FormValue("password")
 
 	// Check if password and username and username belong to an account
-	valid, userID := services.ValidLoginCredentials(username, password)
+	valid, userID := helpers.ValidLoginCredentials(username, password)
 	if !valid {
 		w.Header().Set("Content-Type", "text/html; charset=UTF-8")
 		w.WriteHeader(http.StatusUnauthorized)

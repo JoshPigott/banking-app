@@ -56,7 +56,7 @@
 │   ├───server
 │   │       routes.go
 │   │
-│   ├───services
+│   ├───helpers
 │   │       auth.go
 │   │       bank-accounts.go
 │   │       sessions.go

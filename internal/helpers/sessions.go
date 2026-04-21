@@ -1,4 +1,4 @@
-package services
+package helpers
 
 import (
 	"banking-app/internal/database"
