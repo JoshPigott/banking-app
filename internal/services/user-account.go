@@ -21,12 +21,27 @@ func CreateUserAccount(username string, password string) (string, error) {
 	if err != nil {
 		return user.ID, fmt.Errorf("Fail to create users account: %w\n", err)
 	}
-	// Create an erveryday bank account
-	err = database.CreateEverdayAccount(user.ID)
+	// Create bank accounts
+	err = createAllAccounts(user.ID)
 	if err != nil {
-		return user.ID, fmt.Errorf("Fail to create everyday bank account: %w\n", err)
+		return user.ID, err
 	}
 	return user.ID, err
+}
+
+// Set up new bank account in the database for the user
+func createAllAccounts(userID string) error {
+	var err error
+	if err = database.CreateEverdayAccount(userID); err != nil {
+		return fmt.Errorf("Fail to create everyday bank account: %w\n", err)
+	}
+	if err = database.CreateSaverAccount(userID); err != nil {
+		return fmt.Errorf("Fail to create saver bank account: %w\n", err)
+	}
+	if err = database.CreateKiwiSaverAccount(userID); err != nil {
+		return fmt.Errorf("Fail to create kiwi saver bank account: %w\n", err)
+	}
+	return err
 }
 
 func getUser(username string, hashedPassword string) domain.User {
