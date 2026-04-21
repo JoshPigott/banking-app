@@ -29,3 +29,9 @@ Git Hub links for go projects
 https://github.com/benbjohnson/myapp/blob/main/main.go Later try and understand the server part ect
 
 https://go.dev/doc/modules/layout look into this at some point
+
+
+## To do 
+- Store the amount in cents not dollars in my database
+- And how would I make that clear that it is in cents
+- write some more comments in my handlers

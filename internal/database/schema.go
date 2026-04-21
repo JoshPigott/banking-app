@@ -34,15 +34,15 @@ func InitDB() error {
 	// Bank accounts
 	_, err = DB.Exec(`CREATE TABLE IF NOT EXISTS
 	everydayAccount (userID TEXT FORGIN KEY,
-	balance INTEGER)`)
+	balanceCents INTEGER)`)
 
 	_, err = DB.Exec(`CREATE TABLE IF NOT EXISTS
 	saverAccount (userID TEXT FORGIN KEY,
-	balance INTEGER)`)
+	balanceCents INTEGER)`)
 
 	_, err = DB.Exec(`CREATE TABLE IF NOT EXISTS
 	kiwiSaverAccount (userID TEXT FORGIN KEY,
-	balance INTEGER)`)
+	balanceCents INTEGER)`)
 
 	return err
 }

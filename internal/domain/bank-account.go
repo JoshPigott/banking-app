@@ -1,14 +1,14 @@
 package domain
 
-type AccountType string
+type BankAccountType string
 
 const (
-	Everyday  AccountType = "everyday"
-	Saver     AccountType = "saver"
-	KiwiSaver AccountType = "kiwiSaver"
+	Everyday  BankAccountType = "everyday"
+	Saver     BankAccountType = "saver"
+	KiwiSaver BankAccountType = "kiwiSaver"
 )
 
-func (a AccountType) IsValid() bool {
+func (a BankAccountType) IsValid() bool {
 	switch a {
 	case Everyday, Saver, KiwiSaver:
 		return true
@@ -17,11 +17,20 @@ func (a AccountType) IsValid() bool {
 	}
 }
 
-func (a AccountType) GetTableName() string {
-	return string(a) + "account"
+func (a BankAccountType) CanWithdraw() bool {
+	switch a {
+	case Everyday, Saver:
+		return true
+	default:
+		return false
+	}
+}
+
+func (a BankAccountType) GetTableName() string {
+	return string(a) + "Account"
 }
 
 type AccountBalance struct {
-	AccountType AccountType
-	Balance     float64
+	BankAccountType BankAccountType
+	Balance         float64
 }

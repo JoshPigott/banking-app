@@ -30,3 +30,5 @@ func ImportnatFunc () {}
 func simpleUtil() {}
 func main() {}
 (same thing with variables but const above varaibales)
+
+I need to try and play around with io.Reader and io.Writer Like what si io

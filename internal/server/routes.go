@@ -9,6 +9,7 @@ import (
 func Router() *http.ServeMux {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/account-balance", middleware.RequireAuth(handlers.GetAccountBalance))
+	mux.HandleFunc("/transfer", middleware.RequireAuth(handlers.TransferMoney))
 	mux.HandleFunc("/login", handlers.Login)
 	mux.HandleFunc("/sign-up", handlers.SignUp)
 	return mux

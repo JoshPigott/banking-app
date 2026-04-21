@@ -23,16 +23,16 @@ func CleanUpSessions(currTime int64) error {
 
 func GetSession(id string) (domain.Session, error) {
 	var session domain.Session
-	querry := "SELECT * FROM sessions WHERE id = ?"
-	row := DB.QueryRow(querry, id)
+	query := "SELECT * FROM sessions WHERE id = ?"
+	row := DB.QueryRow(query, id)
 	err := row.Scan(&session.ID, &session.UserID, &session.ExpiryTime)
 	return session, err
 }
 
 func GetUserID(id string) (string, error) {
 	var userID string
-	querry := "SELECT userID FROM sessions WHERE id = ?"
-	row := DB.QueryRow(querry, id)
+	query := "SELECT userID FROM sessions WHERE id = ?"
+	row := DB.QueryRow(query, id)
 	err := row.Scan(&userID)
 	return userID, err
 }
