@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>True Funds Bank - Transfer</title>
+</head>
+<body>
+  <header>
+    <a href="/online-banking">X Close</a>
+    <h1>True Funds</h1>
+  </header>
+  <main>
+    <!--I want an arrow between the AccountFrom to the AccountTo-->
+    <h2>Transfer money</h2>
+    <form class="transfer">
+      <div class="transfer__field--from">
+        <label>From</label>
+        <select class="transfer__select--from">
+          <option value="everyday">Everyday Account</option>
+          <option value="saver">Saver Account</option>
+        </select>
+      </div>
+      <div class="transfer__field--to">
+        <label>To</label>
+        <select class="transfer__select--to">
+          <option value="everyday">Everyday Account</option>
+          <option value="saver">Saver Account</option>
+          <option value="kiwiSaver">KiwiSaver Account</option>
+        </select>
+      </div>
+      <div class="transfer__amount">
+        <label>Amount</label>
+        <!--I low key might put a span thing in front-->
+        <input type="number" min="0" max="99999999999999" step="0.01">
+      </div>
+      <div class="transfer-actions">
+        <a href="/online-banking">Canncel</a>
+        <button>Transfer</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

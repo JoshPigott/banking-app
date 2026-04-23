@@ -60,7 +60,7 @@ func SignUp(w http.ResponseWriter, r *http.Request) {
 }
 
 // If username and password are valid create a session
-func Login(w http.ResponseWriter, r *http.Request) {
+func LoginAuth(w http.ResponseWriter, r *http.Request) {
 	// Unpacks form data to get username and password
 	err := r.ParseForm()
 	if err != nil {

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <header>
+    <a href="/online-banking">X Close</a>
+    <h1>True Funds</h1>
+  </header>
+  <main>
+    <!--I want an arrow between the AccountFrom to the AccountTo-->
+    <h2>Make a payment</h2>
+    <form class="payment">
+      <div class="payment__field--from">
+        <label>From</label>
+        <select class="payment__select--from">
+          <option value="everyday">Everyday Account</option>
+          <option value="saver">Saver Account</option>
+        </select>
+      </div>
+      <div class="payment__field--receiver ">
+        <label>To</label>
+        <input
+        type="text"
+        id="username"
+        name="username"
+        required
+        maxlength="100"
+      > 
+      </div>
+      <div class="payment__amount">
+        <label>Amount</label>
+        <!--I low key might put a span thing in front-->
+        <input type="number" min="0" max="99999999999999" step="0.01">
+      </div>
+      <div class="payment-actions">
+        <a href="/online-banking">Cancel</a>
+        <button>Pay</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>
+
