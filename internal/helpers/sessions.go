@@ -23,7 +23,7 @@ func CreateSession(userID string) (string, time.Time, error) {
 func CleanUpSessions() {
 	time.AfterFunc(2*time.Hour, func() {
 		currTime := time.Now().Unix()
-		fmt.Print("Clean Up ran")
+		fmt.Println("Clean Up ran")
 		err := database.CleanUpSessions(currTime)
 		if err != nil {
 			fmt.Printf("Error doing session cleanup %v", err)

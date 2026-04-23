@@ -31,7 +31,13 @@ https://github.com/benbjohnson/myapp/blob/main/main.go Later try and understand 
 https://go.dev/doc/modules/layout look into this at some point
 
 
-## To do 
-- Store the amount in cents not dollars in my database
-- And how would I make that clear that it is in cents
-- write some more comments in my handlers
+## Thing should be done at some point
+- Add docker in my database (somtime)
+- Low key start on the frontend aye
+- Try and like setup 
+- firgure out UI on phones (I have add a quick look)
+- log out
+
+## To list (next)
+- Do the very basic transfer and payments aye
+- THen I think I should commit to github (Make sure I protect the routes before I commit)
