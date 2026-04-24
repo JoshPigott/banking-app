@@ -4,6 +4,8 @@ import (
 	"banking-app/internal/domain"
 	"banking-app/internal/helpers"
 	"errors"
+	"fmt"
+	"html"
 	"math"
 	"net/http"
 	"strconv"
@@ -33,10 +35,9 @@ func GetAccountBalance(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Fail to get balance", http.StatusInternalServerError)
 		return
 	}
-
 	// Create a struc
 	accountBalance := domain.AccountBalance{
-		BankAccountType: bankAccountType,
+		BankAccountType: bankAccountType.GetFormatName(),
 		Balance:         (float64(balanceCents) / 100),
 	}
 	// Uses the struc to fill in a html template and return it as reponse
@@ -83,6 +84,23 @@ func TransferMoney(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(`<div>Transfer sucessful!</div>`))
 }
 
+// Gets username for to create a custom greeting for the user
+func GetWelcomeMessage(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+	// Gets cookie
+	cookie, err := r.Cookie("session_id")
+	if err != nil {
+		w.Write([]byte(""))
+		return
+	}
+	username, err := helpers.GetUsername(cookie.Value)
+	if err != nil {
+		w.Write([]byte(""))
+		return
+	}
+	w.Write(fmt.Appendf(nil, "Hello %s", html.EscapeString(username)))
+}
+
 // Gets data from reqeust and return a struc TransferRequest
 func getPaymentData(r *http.Request) (domain.PaymentRequest, error) {
 	cookie, err := r.Cookie("session_id")
@@ -94,8 +112,8 @@ func getPaymentData(r *http.Request) (domain.PaymentRequest, error) {
 	if err != nil {
 		return domain.PaymentRequest{}, errors.New("Parse error")
 	}
-	accountFrom := domain.BankAccountType(r.FormValue("accountFrom"))
-	receiverUsername := r.FormValue("receiverUsername")
+	accountFrom := domain.BankAccountType(r.FormValue("account-from"))
+	receiverUsername := r.FormValue("receiver-username")
 
 	amountCents, err := getAmount(r)
 	if err != nil {
@@ -121,8 +139,8 @@ func getTransferData(r *http.Request) (domain.TransferRequest, error) {
 		return domain.TransferRequest{}, errors.New("Parse error")
 	}
 
-	accountFrom := domain.BankAccountType(r.FormValue("accountFrom"))
-	accountTo := domain.BankAccountType(r.FormValue("accountTo"))
+	accountFrom := domain.BankAccountType(r.FormValue("account-from"))
+	accountTo := domain.BankAccountType(r.FormValue("account-to"))
 
 	amountCents, err := getAmount(r)
 	if err != nil {
@@ -139,7 +157,6 @@ func getTransferData(r *http.Request) (domain.TransferRequest, error) {
 
 func writeError(w http.ResponseWriter, err error) {
 	w.Header().Set("Content-Type", "text/html; charset=UTF-8")
-	w.WriteHeader(http.StatusBadRequest)
 	w.Write([]byte("<div>" + err.Error() + "</div>"))
 }
 

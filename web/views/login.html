@@ -6,6 +6,9 @@
   <title>True Funds Bank - Login</title>
   <link rel="stylesheet" href="static/style.css">
   <!--I should look into loading image up here-->
+  <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.10/dist/htmx.js"
+   integrity="sha384-Q+Dky3iHVJOr6wUjQ4ulh6uQ76an/t+ak1+PjMVaxRjbZamFLAG+u9InkfjbsEQf"
+    crossorigin="anonymous"></script>
 </head>
 <body>
   <div>
@@ -22,19 +25,20 @@
         id="username"
         name="username"
         required
-        maxlength="10"
+        maxlength="14"
       > 
       <label>Password</label>
       <input
-        type="text"
-        id="username"
-        name="username"
+        type="password"
+        id="password"
+        name="password"
         required
         maxlength="100"
       > 
+      <p class="auth__message"></p>
 
-      <button type="submit">Login</button>
-      <button type="submit">Sign Up</button>
+      <button type="submit" hx-post="/login" hx-target=".auth__message">Login</button>
+      <button type="submit" hx-post="/sign-up" hx-target=".auth__message">Sign Up</button>
 
     </form>
   </div>

@@ -10,7 +10,7 @@ import (
 )
 
 func ValidLoginCredentials(username string, password string) (bool, string) {
-	user, err := database.GetUser(username)
+	user, err := database.GetUserByUsername(username)
 	if err != nil {
 		return false, user.ID
 	}
@@ -33,7 +33,7 @@ func IsValidCredentials(u string, p string) bool {
 }
 
 func isUsernameUnique(username string) bool {
-	_, err := database.GetUser(username)
+	_, err := database.GetUserByUsername(username)
 	if errors.Is(err, sql.ErrNoRows) {
 		return true
 	}

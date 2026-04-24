@@ -11,9 +11,12 @@ func Router() *http.ServeMux {
 	mux.HandleFunc("/account-balance", middleware.RequireAuth(handlers.GetAccountBalance))
 	mux.HandleFunc("/sign-up", handlers.SignUp)
 	mux.HandleFunc("/login", routeLogin)
-	mux.HandleFunc("/payment", routePayment)   // middleware.RequireAuth(
-	mux.HandleFunc("/transfer", routeTransfer) // middleware.RequireAuth(
-	mux.HandleFunc("/online-banking", handlers.GetOnlineBankingPage)
+	mux.HandleFunc("/payment", middleware.RequireAuth(routePayment))
+	mux.HandleFunc("/transfer", middleware.RequireAuth(routeTransfer))
+	mux.HandleFunc("/online-banking", middleware.RequireAuth(handlers.GetOnlineBankingPage))
+	// Html templates
+	mux.HandleFunc("/get-welcome-message", middleware.RequireAuth(handlers.GetWelcomeMessage))
+	// Static files
 	mux.Handle("/static/", serveStaticFiles())
 	return mux
 }

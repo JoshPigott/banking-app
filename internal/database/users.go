@@ -12,10 +12,18 @@ func CreateUserAccount(user domain.User) error {
 	return err
 }
 
-func GetUser(username string) (domain.User, error) {
+func GetUserByUsername(username string) (domain.User, error) {
 	var user domain.User
-	query := "SELECT * FROM USERS WHERE username=?"
+	query := "SELECT * FROM users WHERE username=?"
 	row := DB.QueryRow(query, username)
 	err := row.Scan(&user.ID, &user.Name, &user.HashedPassword)
 	return user, err
+}
+
+func GetUsername(userID string) (string, error) {
+	var username string
+	query := "SELECT username FROM users WHERE userID=?"
+	row := DB.QueryRow(query, userID)
+	err := row.Scan(&username)
+	return username, err
 }
