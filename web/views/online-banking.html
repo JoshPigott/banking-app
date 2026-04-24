@@ -6,6 +6,9 @@
     <title>True Funds Bank - Balance</title>
     <link rel="stylesheet" href="static/style.css">
     <!--I should look into loading image up here-->
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.10/dist/htmx.js"
+    integrity="sha384-Q+Dky3iHVJOr6wUjQ4ulh6uQ76an/t+ak1+PjMVaxRjbZamFLAG+u9InkfjbsEQf"
+    crossorigin="anonymous"></script>
 </head>
 <body>
   <header>
@@ -13,24 +16,21 @@
   </header>
   <main>
     <!--Think I will need to use html to get the username aye-->
-    <h2>Hello Username</h2>
+    <h2 hx-get="/get-welcome-message" hx-trigger="load">Hello Username</h2>
     <div class="transactions">
       <!--I wonder if I can put like some icons in the input area for login and password-->
       <a href="transfer"><button>Transfer money</button></a>
       <a href="payment"><button>Make a payment</button></a>
     </div>
     <div class="accounts">
-      <article class="accounts__everyday">
-        <p>Everyday account</p>
-        <h3>$2023.52</h3>
+      <article class="accounts__everyday" hx-get="/account-balance"
+       hx-vals='{"bankAccountType": "everyday"}' hx-trigger="load">
       </article>
-      <article class="accounts__saver">
-        <p>Saver account</p>
-        <h3>$12.83</h3>
+      <article class="accounts__saver" hx-get="/account-balance"
+       hx-vals='{"bankAccountType": "saver"}' hx-trigger="load">
       </article>
-      <article class="accounts__kiwi-saver">
-        <p>KiwiSaver account</p>
-        <h3>$705.16</h3>
+      <article class="accounts__kiwi-saver" hx-get="/account-balance"
+       hx-vals='{"bankAccountType": "kiwiSaver"}' hx-trigger="load">
       </article>
     </div>
   </main>

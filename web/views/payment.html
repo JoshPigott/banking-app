@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>True Funds - Payment</title>
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.10/dist/htmx.js"
+    integrity="sha384-Q+Dky3iHVJOr6wUjQ4ulh6uQ76an/t+ak1+PjMVaxRjbZamFLAG+u9InkfjbsEQf"
+    crossorigin="anonymous"></script>
 </head>
 <body>
   <header>
@@ -16,7 +19,7 @@
     <form class="payment">
       <div class="payment__field--from">
         <label>From</label>
-        <select class="payment__select--from">
+        <select class="payment__select--from" name="account-from">
           <option value="everyday">Everyday Account</option>
           <option value="saver">Saver Account</option>
         </select>
@@ -26,7 +29,7 @@
         <input
         type="text"
         id="username"
-        name="username"
+        name="receiver-username"
         required
         maxlength="100"
       > 
@@ -34,11 +37,13 @@
       <div class="payment__amount">
         <label>Amount</label>
         <!--I low key might put a span thing in front-->
-        <input type="number" min="0" max="99999999999999" step="0.01">
+        <input name="amount" type="number" min="0" max="99999999999999" step="0.01" >
       </div>
+      <p class="payment__message"></p>
       <div class="payment-actions">
         <a href="/online-banking">Cancel</a>
-        <button>Pay</button>
+        <button type="submit" hx-post="payment"
+        hx-target=".payment__message">Pay</button>
       </div>
     </form>
   </main>

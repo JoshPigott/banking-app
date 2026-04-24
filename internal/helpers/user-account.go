@@ -29,6 +29,21 @@ func CreateUserAccount(username string, password string) (string, error) {
 	return user.ID, err
 }
 
+// Get the userID then the username
+func GetUsername(sessionID string) (string, error) {
+	var err error
+	var username string
+	userID, err := database.GetUserID(sessionID)
+	if err != nil {
+		return username, err
+	}
+	username, err = database.GetUsername(userID)
+	if err != nil {
+		return username, err
+	}
+	return username, err
+}
+
 // Set up new bank account in the database for the user
 func createAllAccounts(userID string) error {
 	var err error

@@ -1,5 +1,10 @@
 package domain
 
+import (
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
+)
+
 type BankAccountType string
 
 const (
@@ -30,8 +35,14 @@ func (a BankAccountType) GetTableName() string {
 	return string(a) + "Account"
 }
 
+// Return the account type with capital letter at the start
+func (a BankAccountType) GetFormatName() string {
+	caser := cases.Title(language.English)
+	return caser.String(string(a))
+}
+
 type AccountBalance struct {
-	BankAccountType BankAccountType
+	BankAccountType string
 	Balance         float64
 }
 

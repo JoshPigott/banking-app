@@ -92,7 +92,7 @@ func isValidAmount(transferAmount int, accountFrom domain.BankAccountType, sessi
 
 // Get receive user id and return if receiver is valid
 func receiver(p *domain.PaymentRequest) bool {
-	user, err := database.GetUser(p.ReceiverUsername)
+	user, err := database.GetUserByUsername(p.ReceiverUsername)
 	if err != nil {
 		return false
 	}
