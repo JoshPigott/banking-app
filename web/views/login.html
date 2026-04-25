@@ -11,36 +11,47 @@
     crossorigin="anonymous"></script>
 </head>
 <body>
-  <div>
+  <header>
     <h1>True Funds</h1>
-  </div>
-  <div>
-    <h2>Continue to Online Banking</h2>
-    <!--FORM SECTION-->
-    <form>
-      <!--I wonder if I can put like some icons in the input area for login and password-->
-      <label>Username</label>
-      <input
-        type="text"
-        id="username"
-        name="username"
-        required
-        maxlength="14"
-      > 
-      <label>Password</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        required
-        maxlength="100"
-      > 
-      <p class="auth__message"></p>
-
-      <button type="submit" hx-post="/login" hx-target=".auth__message">Login</button>
-      <button type="submit" hx-post="/sign-up" hx-target=".auth__message">Sign Up</button>
-
-    </form>
+  </header>
+  <div class="login__background">
+    <div class="login">
+      <h2>Continue to Online Banking</h2>
+      <!--FORM SECTION-->
+      <form class="login__form">
+        <!--I wonder if I can put like some icons in the input area for login and password-->
+        <div class="login__inputs">
+          <div class="login__input">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              autocomplete="username"
+              required
+              maxlength="14"
+            >
+          </div>
+          <div class="login__input">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              maxlength="100"
+            >
+          </div>
+        </div>
+        <p class="auth__message"></p>
+  
+        <button class="login__buttons" type="submit"
+         hx-post="/login" hx-target=".auth__message">Login</button>
+        <button class="login__buttons" type="submit"
+         hx-post="/sign-up" hx-target=".auth__message">Sign Up</button>
+  
+      </form>
+    </div>
   </div>
 </body>
 
