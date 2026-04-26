@@ -1,3 +1,9 @@
+:root{
+    --primary-color: hsl(212, 46%, 45%);
+    --secondary-color: #7598C4;
+    --bg-primary: #AFC3DD;
+    --bg-secondary: #E6EDF6; 
+}
 
 *,
 *::before,
@@ -6,6 +12,10 @@
   margin: 0;
 }
 
+body{
+    background-color: var(--bg-secondary);
+    font-family: SF Pro Display, SF Pro Text, Inter, system-ui, -apple-system, sans-serif;
+}
 
 header{
     display: flex;
@@ -15,18 +25,32 @@ header{
 }
 
 /* Login page */
-/* .login__background {
-    background-color: black;
-    padding: 20px 40px 0px 0px;
-} */
 
 .login {
     display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.login__background {
+    display: flex;
+    justify-content: center;
+    background-color: var(--bg-primary);
+    width: 100%;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 20px;
+}
+
+.login__container {
+    display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: 10px;
-    margin-right: 10px;
-    background-color: rgb(255, 255, 255);
+    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: var(--bg-primary);
 }
 
 .login h2 {
@@ -38,6 +62,7 @@ header{
 .login__form {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 10px;
     width: 100%;
 }
@@ -45,6 +70,9 @@ header{
 .login__inputs {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    margin-bottom: 8px;
 }
 
 .login__input {
@@ -60,11 +88,81 @@ header{
     font-weight: 400;
 }
 
+.login__input-box{
+    position: relative;
+}
+
+.login__user-icon {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    height: 25px;
+}
+
+.login__password-icon {
+    position: absolute;
+    top: 16px;
+    left: 11px;
+    height: 23px;
+    opacity: 0.65;
+}
+
 .login__input input {
     height: 56px;
+    width: 100%;
+    padding-left: 40px;
+    font-size: .95rem;
+    border: 1px, solid, rgb(0, 0, 0);
+    background-color: var(--bg-primary);
+}
+
+/* Put the class in only when it is shown*/
+.login__message--show {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 12px 5px;
+    margin: 16px 0;
+    color: #FFFFFF;
+    background-color: #FF0000;
+    border-radius: 5px;
+}
+
+.login__message--show {
+    font-weight: 500;
 }
 
 .login__buttons {
     width: 100%;
     height: 56px;
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 2.5px;
+    border: 1.5px solid transparent;              
+    transition: border-color 0.3s ease;  
+    font-size: 16px;
+    font-weight: 450;
+    font-family: SF Pro Display, SF Pro Text, Inter, system-ui, -apple-system, sans-serif;;
+}
+
+.login__buttons--login {
+    margin-top: 8px;
+    margin-bottom: 4px;
+}
+
+.login__buttons:hover{
+    border-color: white;
+}
+
+@media (width >= 480px){
+    .login__background {
+        max-width: 448px;
+    }
+}
+
+@media (width >= 736px){
+    .login__background {
+        padding: 0 120px;
+        max-width: 648px;
+    }
 }

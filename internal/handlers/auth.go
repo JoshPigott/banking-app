@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"banking-app/internal/helpers"
+	"fmt"
 	"net/http"
 )
 
@@ -37,6 +38,7 @@ func SignUp(w http.ResponseWriter, r *http.Request) {
 
 // If username and password are valid create a session
 func LoginAuth(w http.ResponseWriter, r *http.Request) {
+	fmt.Print("start")
 	// Unpacks form data to get username and password
 	err := r.ParseForm()
 	if err != nil {
@@ -58,6 +60,7 @@ func LoginAuth(w http.ResponseWriter, r *http.Request) {
 		writeServerError(w)
 		return
 	}
+	fmt.Print("End")
 	writeAuthSuccess(w)
 }
 
@@ -83,18 +86,18 @@ func setSessionCookie(w http.ResponseWriter, userID string) error {
 }
 
 func writeInvalidCredentials(w http.ResponseWriter) {
-	w.Header().Set("Content-Type", "text/plain; charset=UTF-8")
-	w.Write([]byte(`Invalid password or username`))
+	w.Header().Set("Content-Type", "text/html; charset=UTF-8")
+	w.Write([]byte(`<div class="login__message login__message--show">
+	<p>Invalid password or username</p></div>`))
 }
 
 func writeServerError(w http.ResponseWriter) {
-	w.Header().Set("Content-Type", "text/plain; charset=UTF-8")
-	w.Write([]byte(`Unable to process request`))
+	w.Header().Set("Content-Type", "text/html; charset=UTF-8")
+	w.Write([]byte(`<div class="login__message login__message--show">
+	<p>Unable to process request</p></div>`))
 }
 
 func writeAuthSuccess(w http.ResponseWriter) {
-	// May I need to set the contentype not sure
-	w.Header().Set("Content-Type", "text/html; charset=UTF-8")
 	w.Header().Set("HX-Redirect", "/online-banking")
 	w.WriteHeader(http.StatusCreated)
 }
