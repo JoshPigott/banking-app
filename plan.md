@@ -37,7 +37,6 @@ https://go.dev/doc/modules/layout look into this at some point
 - Try and like setup 
 - firgure out UI on phones (I have add a quick look)
 - log out
+- Redirct to online banking if trying to login but already login
 
 ## To list (next)
-- Do the very basic transfer and payments aye
-- THen I think I should commit to github (Make sure I protect the routes before I commit)

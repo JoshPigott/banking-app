@@ -1,7 +1,7 @@
 package server
 
 import (
-	"banking-app/internal/handlers.go"
+	"banking-app/internal/handlers"
 	"banking-app/internal/middleware"
 	"net/http"
 )

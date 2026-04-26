@@ -14,43 +14,53 @@
   <header>
     <h1>True Funds</h1>
   </header>
-  <div class="login__background">
-    <div class="login">
-      <h2>Continue to Online Banking</h2>
-      <!--FORM SECTION-->
-      <form class="login__form">
-        <!--I wonder if I can put like some icons in the input area for login and password-->
-        <div class="login__inputs">
-          <div class="login__input">
-            <label for="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              autocomplete="username"
-              required
-              maxlength="14"
-            >
+  <div class="login">
+    <div class="login__background">
+      <div class="login__container">
+        <h2>Continue to Online Banking</h2>
+        <!--FORM SECTION-->
+        <form class="login__form">
+          <!--I wonder if I can put like some icons in the input area for login and password-->
+          <div class="login__inputs">
+            <div class="login__input">
+              <label for="username">Username</label>
+              <div class="login__input-box">
+                <img class="login__user-icon" src="static/user-icon.png" alt="user-icon">
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  autocomplete="off"
+                  required
+                  maxlength="14"
+                >
+              </div>
+            </div>
+            <div class="login__input">
+              <label for="password">Password</label>
+              <div class="login__input-box">
+              <img class="login__password-icon" src="static/password-icon.png" alt="user-icon">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                autocomplete="off"
+                required
+                maxlength="100"
+              >
+              </div>
+            </div>
           </div>
-          <div class="login__input">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              required
-              maxlength="100"
-            >
-          </div>
-        </div>
-        <p class="auth__message"></p>
   
-        <button class="login__buttons" type="submit"
-         hx-post="/login" hx-target=".auth__message">Login</button>
-        <button class="login__buttons" type="submit"
-         hx-post="/sign-up" hx-target=".auth__message">Sign Up</button>
-  
-      </form>
+          <div class="login__message"></div>
+    
+          <button class="login__buttons login__buttons--login"  type="submit"
+           hx-post="/login" hx-target=".login__message" hx-swap="outerHTML">Login</button>
+          <button class="login__buttons" type="submit" hx-post="/sign-up"
+           hx-target=".login__message" hx-swap="outerHTML">Sign Up</button>
+    
+        </form>
+      </div>
     </div>
   </div>
 </body>
