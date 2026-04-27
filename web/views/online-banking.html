@@ -10,28 +10,31 @@
     integrity="sha384-Q+Dky3iHVJOr6wUjQ4ulh6uQ76an/t+ak1+PjMVaxRjbZamFLAG+u9InkfjbsEQf"
     crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="background__full-page">
   <header>
     <h1>True Funds</h1>
   </header>
-  <main>
-    <!--Think I will need to use html to get the username aye-->
-    <h2 hx-get="/get-welcome-message" hx-trigger="load">Hello Username</h2>
-    <div class="transactions">
-      <!--I wonder if I can put like some icons in the input area for login and password-->
-      <a href="transfer"><button>Transfer money</button></a>
-      <a href="payment"><button>Make a payment</button></a>
+  <main class="banking">
+    <div class="banking__dashboard">
+      <h2 class="banking__meassage" hx-get="/get-welcome-message" hx-trigger="load">Hello</h2>
+      <div class="banking__transactions">
+        <!--I wonder if I can put like some icons in the input area for login and password-->
+        <a href="transfer" class="banking__links">Transfer money</a>
+        <a href="payment"class="banking__links">Make a payment</a>
+      </div>
     </div>
-    <div class="accounts">
-      <article class="accounts__everyday" hx-get="/account-balance"
-       hx-vals='{"bankAccountType": "everyday"}' hx-trigger="load">
-      </article>
-      <article class="accounts__saver" hx-get="/account-balance"
-       hx-vals='{"bankAccountType": "saver"}' hx-trigger="load">
-      </article>
-      <article class="accounts__kiwi-saver" hx-get="/account-balance"
-       hx-vals='{"bankAccountType": "kiwiSaver"}' hx-trigger="load">
-      </article>
+    <div class="banking__accounts-container">
+      <div class="banking__accounts">
+        <article class="banking__everyday banking__account" hx-get="/account-balance"
+         hx-vals='{"bankAccountType": "everyday"}' hx-trigger="load">
+        </article>
+        <article class="banking__saver banking__account" hx-get="/account-balance"
+         hx-vals='{"bankAccountType": "saver"}' hx-trigger="load">
+        </article>
+        <article class="banking__kiwi-saver banking__account" hx-get="/account-balance"
+         hx-vals='{"bankAccountType": "kiwiSaver"}' hx-trigger="load">
+        </article>
+      </div>
     </div>
   </main>
 </body>

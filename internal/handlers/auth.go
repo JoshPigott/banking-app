@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"banking-app/internal/helpers"
-	"fmt"
 	"net/http"
 )
 
@@ -38,7 +37,6 @@ func SignUp(w http.ResponseWriter, r *http.Request) {
 
 // If username and password are valid create a session
 func LoginAuth(w http.ResponseWriter, r *http.Request) {
-	fmt.Print("start")
 	// Unpacks form data to get username and password
 	err := r.ParseForm()
 	if err != nil {
@@ -60,7 +58,6 @@ func LoginAuth(w http.ResponseWriter, r *http.Request) {
 		writeServerError(w)
 		return
 	}
-	fmt.Print("End")
 	writeAuthSuccess(w)
 }
 

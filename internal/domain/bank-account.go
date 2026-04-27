@@ -41,9 +41,23 @@ func (a BankAccountType) GetFormatName() string {
 	return caser.String(string(a))
 }
 
-type AccountBalance struct {
+func (a BankAccountType) GetImageName() string {
+	switch a {
+	case "everyday":
+		return "everyday-account"
+	case "saver":
+		return "saver-account"
+	case "kiwiSaver":
+		return "kiwisaver-account"
+	default:
+		return "default-account"
+	}
+}
+
+type Account struct {
 	BankAccountType string
-	Balance         float64
+	Balance         string
+	ImageName       string
 }
 
 type TransferRequest struct {

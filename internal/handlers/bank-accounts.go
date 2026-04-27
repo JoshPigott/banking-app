@@ -12,9 +12,9 @@ import (
 	"text/template"
 )
 
-var tmpl = template.Must(template.ParseFiles("web/templates/balance.html"))
+var tmpl = template.Must(template.ParseFiles("web/templates/account.html"))
 
-func GetAccountBalance(w http.ResponseWriter, r *http.Request) {
+func GetAccount(w http.ResponseWriter, r *http.Request) {
 	// Gets the account type
 	params := r.URL.Query()
 	bankAccountType := domain.BankAccountType(params.Get("bankAccountType"))
@@ -36,13 +36,14 @@ func GetAccountBalance(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// Create a struc
-	accountBalance := domain.AccountBalance{
+	account := domain.Account{
 		BankAccountType: bankAccountType.GetFormatName(),
-		Balance:         (float64(balanceCents) / 100),
+		Balance:         fmt.Sprintf("%.2f", float64(balanceCents)/100),
+		ImageName:       bankAccountType.GetImageName(),
 	}
 	// Uses the struc to fill in a html template and return it as reponse
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	if err = tmpl.Execute(w, accountBalance); err != nil {
+	if err = tmpl.Execute(w, account); err != nil {
 		http.Error(w, "Template error", http.StatusInternalServerError)
 		return
 	}
