@@ -16,12 +16,12 @@
       <h1>True Funds</h1>
     </div>
   </header>
-  <main class="transfer">
-    <div class="transfer__container">
+  <main class="transaction">
+    <div class="transaction__container">
       <h2>Transfer money</h2>
-      <form class="transfer__form">
+      <form class="transaction__form">
     
-        <div class="transfer__field--from">
+        <div class="transaction__field--from">
           <label>From</label> <!--I need to add a for in-->
           <div class="dropdown">
             <div class="dropdown__selected">
@@ -36,7 +36,7 @@
           </div>
         </div>
   
-        <div class="transfer__field--to">
+        <div class="transaction__field--to">
           <label>To</label> <!--I need to add a for in-->
           <div class="dropdown">
             <div class="dropdown__selected">
@@ -52,18 +52,18 @@
           </div>
         </div>
   
-        <div class="transfer__amount">
-          <label for="transfer__amount-input">Amount</label> 
-          <img class="transfer__dollar-sign" src="static/dollar-sign-icon.png" alt="dollar sign">
-          <input id="transfer__amount-input" name="amount" type="number" min="0" max="99999999999999"
+        <div class="transaction__amount">
+          <label for="transaction__amount-input">Amount</label> 
+          <img class="transaction__dollar-sign" src="static/dollar-sign-icon.png" alt="dollar sign">
+          <input id="transaction__amount-input" name="amount" type="number" min="0" max="99999999999999"
            step="0.01" placeholder="Enter Amount" autocomplete="off">
         </div>
   
-        <div class="transfer__message"></div>
-        <div class="transfer-actions">
+        <div class="transaction__message"></div>
+        <div class="transaction-actions">
           <button type="submit" hx-post="transfer"
-           hx-target=".transfer__message" class="transfer__button transfer__button--continue">Transfer</button>
-          <a href="/online-banking" class="transfer__button transfer__button--cancel"><p>Cancel</p></a>    
+           hx-target=".transaction__message" class="transaction__button transaction__button--continue">Transfer</button>
+          <a href="/online-banking" class="transaction__button transaction__button--cancel"><p>Cancel</p></a>    
         </div>
       </form>
     </div>
