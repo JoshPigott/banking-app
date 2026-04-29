@@ -74,3 +74,5 @@
 
 ## Problems issues know constraints
 A lot of the current code lacks the go idiomatic style
+The CSS on a latop screen size looks bad (smaller and bigger ok)
+The transfer and payment are not beign clear after transaction

@@ -63,7 +63,7 @@ func Payment(w http.ResponseWriter, r *http.Request) {
 		writeError(w, err)
 		return
 	}
-	w.Write([]byte(`<div>Payment sucessful!</div>`))
+	w.Write([]byte(`<p class="transaction__message--success">Payment sucessful!</p>`))
 }
 
 func TransferMoney(w http.ResponseWriter, r *http.Request) {
@@ -82,7 +82,9 @@ func TransferMoney(w http.ResponseWriter, r *http.Request) {
 		writeError(w, err)
 		return
 	}
-	w.Write([]byte(`<div>Transfer sucessful!</div>`))
+	w.Write([]byte(`<p class="transaction__message--success">Transfer sucessful!</p>
+	<input id="transfer__amount-input" name="amount" type="number" min="0" max="99999999999999"
+	step="0.01" placeholder="Enter Amount done" autocomplete="off" hx-swap-oob="true">`))
 }
 
 // Gets username for to create a custom greeting for the user
@@ -158,12 +160,7 @@ func getTransferData(r *http.Request) (domain.TransferRequest, error) {
 
 func writeError(w http.ResponseWriter, err error) {
 	w.Header().Set("Content-Type", "text/html; charset=UTF-8")
-	w.Write([]byte("<div>" + err.Error() + "</div>"))
-}
-
-func writeSuccess(w http.ResponseWriter, message string) {
-	w.Header().Set("Content-Type", "text/html; charset=UTF-8")
-	w.Write([]byte("<div>" + message + "</div>"))
+	w.Write([]byte("<p class='transaction__message--error'>" + err.Error() + "</p>"))
 }
 
 // Gets amount from requst and return in cents

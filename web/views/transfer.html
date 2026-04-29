@@ -4,46 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>True Funds Bank - Transfer</title>
-</head>
-<body>
-  <header>
-    <a href="/online-banking">X Close</a>
-    <h1>True Funds</h1>
+    <link rel="stylesheet" href="static/style.css">
     <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.10/dist/htmx.js"
     integrity="sha384-Q+Dky3iHVJOr6wUjQ4ulh6uQ76an/t+ak1+PjMVaxRjbZamFLAG+u9InkfjbsEQf"
     crossorigin="anonymous"></script>
+</head>
+<body class="background__full-page">
+  <header>
+    <a href="/online-banking" class="back-button"><span>✕</span> Close</a>
+    <div class="header-with-close">
+      <h1>True Funds</h1>
+    </div>
   </header>
-  <main>
-    <!--I want an arrow between the AccountFrom to the AccountTo-->
-    <h2>Transfer money</h2>
-    <form class="transfer">
-      <div class="transfer__field--from">
-        <label>From</label>
-        <select class="transfer__select--from" name="account-from">
-          <option value="everyday">Everyday Account</option>
-          <option value="saver">Saver Account</option>
-        </select>
-      </div>
-      <div class="transfer__field--to">
-        <label>To</label>
-        <select class="transfer__select--to" name="account-to">
-          <option value="everyday">Everyday Account</option>
-          <option value="saver">Saver Account</option>
-          <option value="kiwiSaver">KiwiSaver Account</option>
-        </select>
-      </div>
-      <div class="transfer__amount">
-        <label>Amount</label>
-        <!--I low key might put a span thing in front-->
-        <input name="amount" type="number" min="0" max="99999999999999" step="0.01">
-      </div>
-      <p class="transfer__message"></p>
-      <div class="transfer-actions">
-        <a href="/online-banking">Canncel</a>
-        <button type="submit" hx-post="transfer"
-         hx-target=".transfer__message">Transfer</button>
-      </div>
-    </form>
+  <main class="transfer">
+    <div class="transfer__container">
+      <h2>Transfer money</h2>
+      <form class="transfer__form">
+    
+        <div class="transfer__field--from">
+          <label>From</label> <!--I need to add a for in-->
+          <div class="dropdown">
+            <div class="dropdown__selected">
+              <p>Everyday Account</p>
+              <span>⌵</span>
+            </div>
+            <ul class="dropdown__options">
+              <li data-value="everyday" class="dropdown__option--selected dropdown__options--hidden">Everyday Account</li>
+              <li data-value="saver" class="dropdown__options--hidden">Saver Account</li>
+            </ul>
+            <input type="hidden" name="account-from" class="dropdown__account-from" value="everyday">
+          </div>
+        </div>
+  
+        <div class="transfer__field--to">
+          <label>To</label> <!--I need to add a for in-->
+          <div class="dropdown">
+            <div class="dropdown__selected">
+              <p>Saver Account</p>
+              <span>⌵</span>
+            </div>
+            <ul class="dropdown__options">
+              <li data-value="everyday" class="dropdown__options--hidden">Everyday Account</li>
+              <li data-value="saver" class="dropdown__option--selected dropdown__options--hidden">Saver Account</li>
+              <li data-value="kiwiSaver" class="dropdown__options--hidden">KiwiSaver Account</li>
+            </ul>
+            <input type="hidden" name="account-to" class="dropdown__account-to" value="saver">
+          </div>
+        </div>
+  
+        <div class="transfer__amount">
+          <label for="transfer__amount-input">Amount</label> 
+          <img class="transfer__dollar-sign" src="static/dollar-sign-icon.png" alt="dollar sign">
+          <input id="transfer__amount-input" name="amount" type="number" min="0" max="99999999999999"
+           step="0.01" placeholder="Enter Amount" autocomplete="off">
+        </div>
+  
+        <div class="transfer__message"></div>
+        <div class="transfer-actions">
+          <button type="submit" hx-post="transfer"
+           hx-target=".transfer__message" class="transfer__button transfer__button--continue">Transfer</button>
+          <a href="/online-banking" class="transfer__button transfer__button--cancel"><p>Cancel</p></a>    
+        </div>
+      </form>
+    </div>
   </main>
+  <script src="static/dropdown.js"></script>
 </body>
 </html>

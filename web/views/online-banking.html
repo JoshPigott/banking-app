@@ -12,14 +12,16 @@
 </head>
 <body class="background__full-page">
   <header>
-    <h1>True Funds</h1>
+    <div>
+      <h1>True Funds</h1>
+    </div>
   </header>
   <main class="banking">
     <div class="banking__dashboard">
       <h2 class="banking__meassage" hx-get="/get-welcome-message" hx-trigger="load">Hello</h2>
       <div class="banking__transactions">
         <!--I wonder if I can put like some icons in the input area for login and password-->
-        <a href="transfer" class="banking__links">Transfer money</a>
+        <a href="transfer" class="banking__links banking__transfer">Transfer money</a>
         <a href="payment"class="banking__links">Make a payment</a>
       </div>
     </div>
