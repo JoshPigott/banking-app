@@ -63,7 +63,9 @@ func Payment(w http.ResponseWriter, r *http.Request) {
 		writeError(w, err)
 		return
 	}
-	w.Write([]byte(`<p class="transaction__message--success">Payment sucessful!</p>`))
+	w.Write([]byte(`<p class="transaction__message--success">Payment sucessful!</p>
+	<input id="transaction__amount-input" name="amount" type="number" min="0" max="99999999999999"
+	step="0.01" placeholder="Enter Amount done" autocomplete="off" hx-swap-oob="true">`))
 }
 
 func TransferMoney(w http.ResponseWriter, r *http.Request) {
@@ -83,7 +85,7 @@ func TransferMoney(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Write([]byte(`<p class="transaction__message--success">Transfer sucessful!</p>
-	<input id="transfer__amount-input" name="amount" type="number" min="0" max="99999999999999"
+	<input id="transaction__amount-input" name="amount" type="number" min="0" max="99999999999999"
 	step="0.01" placeholder="Enter Amount done" autocomplete="off" hx-swap-oob="true">`))
 }
 

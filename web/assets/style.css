@@ -284,7 +284,7 @@ header div {
     justify-content: space-between;
 }
 
-.banking__transfer {
+.banking__transaction {
     display: flex;
     justify-content: center;
 }
@@ -398,12 +398,12 @@ header div {
     }
 }
 
-/* transfer page */
+/* payment and transfer page */
 .background__full-page {
     background-color: var(--bg-primary);
 }
 
-.transfer {
+.transaction {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -414,7 +414,7 @@ header div {
     width: 100%; 
 }
 
-.transfer__container {
+.transaction__container {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -422,12 +422,12 @@ header div {
     justify-content: center;
 }
 
-.transfer__container h2 {
+.transaction__container h2 {
     font-size: 20px;
     font-weight: 500;
 }
 
-.transfer__form {
+.transaction__form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -435,45 +435,72 @@ header div {
     width: 100%;
 }
 
-.transfer__field--from {
+.transaction__field--from {
     display: flex;
     flex-direction: column;
     gap: 2px;
     width: 100%;
 }
 
-.transfer__field--to {
+.transaction__field--to {
     display: flex;
     flex-direction: column;
     gap: 2px;
     width: 100%;
 }
 
-.transfer__amount {
+.transaction__field--receiver {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+}
+
+.transaction__field--receiver div {
+    position: relative;
+    width: 100%;
+}
+
+.transaction__field--receiver div input {
+    height: 56px;
+    padding-left: 40px;
+    font-size: 16px;
+    font-family: SF Pro Display, SF Pro Text, Inter, system-ui, -apple-system, sans-serif;
+    width: 100%;
+}
+
+.transaction__user-icon {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    height: 25px;
+}
+
+.transaction__amount {
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 2px;
     width: 100%;
 }
-.transfer__amount input {
+.transaction__amount input {
     height: 56px;
     font-size: 16px;
     padding-left: 40px;
 }
 
-.transfer__dollar-sign {
+.transaction__dollar-sign {
     position: absolute;
     top: 40px;
     left: 12px;
     height: 20px;
 }
 
-.transfer__message {
+.transaction__message {
     width: 100%;
 }
 
-.transfer__message .transaction__message--error {
+.transaction__message .transaction__message--error {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -484,7 +511,7 @@ header div {
     border-radius: 5px;
 }
 
-.transfer__message .transaction__message--success {
+.transaction__message .transaction__message--success {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -496,7 +523,7 @@ header div {
     border: 1.5px solid #FFFFFF;
 }
 
-.transfer-actions {
+.transaction-actions {
     display: flex;
     flex-direction: column;
     gap:  16px;
@@ -504,7 +531,7 @@ header div {
     margin-bottom: 32px;
 }
 
-.transfer__button {
+.transaction__button {
     width: 100%;
     height: 56px;
     padding: 12px 20px;
@@ -520,21 +547,21 @@ header div {
     font-family: SF Pro Display, SF Pro Text, Inter, system-ui, -apple-system, sans-serif;
 }
 
-.transfer__button:hover{
+.transaction__button:hover{
     border-color: white;
 }
 
-.transfer__button--cancel {
+.transaction__button--cancel {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 @media (width >= 672px) {
-    .transfer__container {
+    .transaction__container {
         max-width: 648px;
     }
-    .transfer-actions {
+    .transaction-actions {
         flex-direction: row-reverse;
         gap: 32px;
     }
