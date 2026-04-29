@@ -12,7 +12,9 @@
 </head>
 <body>
   <header>
-    <h1>True Funds</h1>
+    <div>
+      <h1>True Funds</h1>
+    </div>
   </header>
   <div class="login">
     <div class="login__background">
@@ -39,21 +41,19 @@
             <div class="login__input">
               <label for="password">Password</label>
               <div class="login__input-box">
-              <img class="login__password-icon" src="static/password-icon.png" alt="user-icon">
-              <input
-                type="password"
-                id="password"
-                name="password"
-                autocomplete="off"
-                required
-                maxlength="100"
-              >
+                <img class="login__password-icon" src="static/password-icon.png" alt="user-icon">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  autocomplete="off"
+                  required
+                  maxlength="100"
+                >
               </div>
             </div>
           </div>
-  
           <div class="login__message"></div>
-    
           <button class="login__buttons login__buttons--login"  type="submit"
            hx-post="/login" hx-target=".login__message" hx-swap="outerHTML">Login</button>
           <button class="login__buttons" type="submit" hx-post="/sign-up"
