@@ -18,23 +18,40 @@ body{
 }
 
 /* header */
-header div {
+/* I may need to fix the login header after */
+header h1 {
     display: flex;
     justify-content: center;
     margin-top: 42px;
     margin-bottom: 42px;
 }
 
-.header-with-close {
+.header__title-container {
     margin-top: 16px;
 }
 
-.back-button {
+.header__buttons-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.header__button-container {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-top: 8px;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.header__button {
     display: inline-block;
     padding: 8px;
     padding-top: 6px;
-    margin-top: 8px;
-    margin-left: 12px;
     border-radius: 5px;
     font-size: 16px;
     font-weight: 450;
@@ -42,13 +59,25 @@ header div {
     color: black;
 }
 
-.back-button:hover {
+.header__button:hover {
     background-color: hsl(214, 40%, 83%);
 }
 
-.back-button span {
+.header__button--back span {
+    padding-top: 10px;
     font-size: 18px;
 }
+
+.header__button--logout {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.header__button--logout img {
+    height: 15px;
+}
+
 
 /* Gobal */ 
 

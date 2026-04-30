@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"banking-app/internal/database"
 	"banking-app/internal/helpers"
 	"net/http"
 )
@@ -61,6 +62,21 @@ func LoginAuth(w http.ResponseWriter, r *http.Request) {
 	writeAuthSuccess(w)
 }
 
+// Deletes user session
+func Logout(w http.ResponseWriter, r *http.Request) {
+	// Gets cookie
+	cookie, err := r.Cookie("session_id")
+	if err != nil {
+		logoutError(w)
+		return
+	}
+	if err = database.DeleteSession(cookie.Value); err != nil {
+		logoutError(w)
+		return
+	}
+	w.Header().Set("HX-Redirect", "/login")
+}
+
 // Set reponse with a cookie containing session id
 func setSessionCookie(w http.ResponseWriter, userID string) error {
 	// Creates session in database
@@ -97,4 +113,9 @@ func writeServerError(w http.ResponseWriter) {
 func writeAuthSuccess(w http.ResponseWriter) {
 	w.Header().Set("HX-Redirect", "/online-banking")
 	w.WriteHeader(http.StatusCreated)
+}
+
+func logoutError(w http.ResponseWriter) {
+	w.Header().Set("Content-Type", "text/plain; charset=UTF-8")
+	w.Write([]byte(`Unable to login out`))
 }
