@@ -12,7 +12,13 @@
 </head>
 <body class="background__full-page">
   <header>
-    <div>
+    <div class="header__button-container">
+      <a hx-get="/logout" class="header__button header__button--logout">
+        <img src="static/password-icon.png" alt="password icon">
+        <p>Log out</p>
+      </a>
+    </div>
+    <div class="header__title-container">
       <h1>True Funds</h1>
     </div>
   </header>
