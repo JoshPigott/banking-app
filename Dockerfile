@@ -1,11 +1,16 @@
 FROM golang:1.26.2
 
-# WORKDIR /app
+WORKDIR /app
 
-# COPY . .
+RUN go install github.com/air-verse/air@latest
 
+COPY . .
+
+# I will need to remove the run with air
 # RUN go build -o app ./cmd/main.go
 
-# CMD ["./app"] 
+EXPOSE 8080
 
-# # I will learn this mean in a bit
+CMD ["air"] 
+
+# I will learn this mean in a bit
