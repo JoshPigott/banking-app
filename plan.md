@@ -40,3 +40,6 @@ https://go.dev/doc/modules/layout look into this at some point
 - Redirct to online banking if trying to login but already login
 
 ## To list (next)
+- preload images
+- do docmention
+- Firggure the for label things
